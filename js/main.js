@@ -24,10 +24,8 @@ var searchInput = document.getElementById("searchInput");
 var currentIndex = 0;
 var allContact = [];
 
-// No seeded/default contacts — the app only ever shows what's in localStorage
 var defaultContacts = [];
 
-//! Initialize & Load LocalStorage
 try {
   var saved = localStorage.getItem("contacts");
   if (saved) {
@@ -42,10 +40,8 @@ try {
   allContact = defaultContacts;
 }
 
-// Initial Call on Load
 display();
 
-//! Safe save helper (won't crash the app if storage is unavailable, e.g. file:// or private mode)
 function saveContacts() {
   try {
     localStorage.setItem("contacts", JSON.stringify(allContact));
@@ -128,11 +124,11 @@ function display() {
     return;
   }
 
-  var cartona = '';
+  var box = '';
   var favTotal = 0;
   var emgTotal = 0;
-  var favCartona = '';
-  var emgCartona = '';
+  var favBox = '';
+  var emgBox = '';
 
   for (var i = 0; i < allContact.length; i++) {
     var contact = allContact[i];
@@ -144,7 +140,7 @@ function display() {
     // Favorites Sidebar Item
     if (contact.isFavorite) {
       favTotal++;
-      favCartona += `
+      favBox += `
         <div class="sidebar-contact-card">
           <div class="sidebar-contact-avatar" style="background: #3b82f6">
             ${sideInitials}
@@ -162,7 +158,7 @@ function display() {
     // Emergency Sidebar Item
     if (contact.isEmergency) {
       emgTotal++;
-      emgCartona += `
+      emgBox += `
         <div class="sidebar-contact-card">
           <div class="sidebar-contact-avatar" style="background: #ef4444">
             ${sideInitials}
@@ -182,7 +178,7 @@ function display() {
     var initials = (firstName.charAt(0) + firstName.charAt(1)).toUpperCase();
 
     // Main Contact Card HTML
-    cartona += `
+    box += `
       <div class="col-md-6">
         <div class="contact-card">
           <div class="contact-header">
@@ -238,14 +234,13 @@ function display() {
       </div>`;
   }
 
-  // Inject dynamic HTML content
-  rowData.innerHTML = cartona;
+  rowData.innerHTML = box;
   totalContacts.innerHTML = allContact.length;
   favoritesCount.innerHTML = favTotal;
   emergencyCount.innerHTML = emgTotal;
 
-  favoritesList.innerHTML = favCartona || '<p class="text-center text-muted small mb-0 py-4">No favorites yet</p>';
-  emergencyList.innerHTML = emgCartona || '<p class="text-center text-muted small mb-0 py-4">No emergency contacts</p>';
+  favoritesList.innerHTML = favBox || '<p class="text-center text-muted small mb-0 py-4">No favorites yet</p>';
+  emergencyList.innerHTML = emgBox || '<p class="text-center text-muted small mb-0 py-4">No emergency contacts</p>';
 }
 
 //! Delete Contact Function
@@ -425,7 +420,7 @@ function closeModal() {
   }
 }
 
-//! Simple Live Validation
+//! Validation
 fullNameInput.addEventListener("input", function () {
   if (fullNameInput.value.trim().length < 3) {
     fullNameInput.classList.add('is-invalid');
