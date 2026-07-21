@@ -1,0 +1,904 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --ch-bg: #f8fafc;
+  --ch-violet: #7F23FE;
+  --ch-indigo: #6133F8;
+  --ch-text: #101828;
+  --ch-muted: #6B7283;
+  --ch-border: #e5e7eb;
+  --ch-white: #ffffff;
+  --ch-border-gray-100: #f3f4f6;
+
+  /* Added for the new .contact-card / .tag / .contact-action components */
+  --ch-blue: #3b82f6;
+  --ch-orange: #f97316;
+  --ch-red: #ef4444;
+  --ch-yellow: #eab308;
+  --ch-green: #10b981;
+}
+ 
+/* ----- Base page styles ----- */
+.contacthub-page {
+  font-family: "Inter", sans-serif;
+  background-color: var(--ch-bg);
+  color: var(--ch-text);
+  min-height: 100vh;
+}
+ 
+.ch-container {
+  max-width: 1280px;
+  padding-inline: 1rem;
+}
+ 
+.text-violet {
+  color: var(--ch-violet) !important;
+}
+ 
+.rounded12 {
+  border-radius: 0.75rem;
+}
+ 
+.rounded-xl {
+  border-radius: 14px;
+}
+ 
+.border-gray-100 {
+  border-color: var(--ch-border-gray-100) !important;
+}
+ 
+ 
+/* ============================================
+   Header
+   ============================================ */
+ 
+.ch-header {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(229, 231, 235, 0.5);
+  z-index: 1030;
+}
+ 
+.ch-header-inner {
+  min-height: 4rem;
+}
+ 
+.ch-logo-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+  font-size: 1.125rem;
+  background: linear-gradient(135deg, var(--ch-violet), var(--ch-indigo));
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.25);
+}
+ 
+.ch-brand-title {
+  font-size: 1.25rem;
+}
+ 
+.ch-brand-subtitle {
+  font-size: 0.75rem;
+  color: var(--ch-muted);
+  font-weight: 500;
+}
+ 
+.ch-btn-primary {
+  font-size: 0.875rem;
+  background: linear-gradient(90deg, var(--ch-violet), var(--ch-indigo));
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+ 
+.ch-btn-primary:hover,
+.ch-btn-primary:focus {
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
+}
+ 
+.btn-icon {
+  font-size: 0.625rem;
+  margin-right: 0.25rem;
+}
+ 
+.ch-icon-btn {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  color: var(--ch-muted);
+  background: transparent;
+  border: none;
+}
+ 
+.ch-icon-btn:hover {
+  color: #374151;
+  background: #f3f4f6;
+}
+ 
+.ch-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  box-shadow: 0 0 0 2px #f3f4f6;
+}
+ 
+ 
+/* ============================================
+   Stat Cards (Total / Favorites / Emergency)
+   ============================================ */
+
+.ch-stat-card:hover {
+  box-shadow: 0 120px 65px rgba(15, 23, 42, 0.12);
+  transition: all 0.15s ease;
+}
+
+.p-32 {
+  padding: 2rem;
+}
+ .card {
+  transition: box-shadow 0.2s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 10px -6px rgba(0, 0, 0, 0.2) !important;
+}
+
+ 
+.card-body {
+  padding: 1.25rem;
+}
+ 
+.ch-stat-icon {
+  width: 3rem;
+  height: 3rem;
+  flex-shrink: 0;
+}
+ 
+.ch-stat-icon-blue {
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.25);
+}
+ 
+.ch-stat-icon-amber {
+  background: linear-gradient(135deg, #fbbf24, #f97316);
+  box-shadow: 0 8px 20px rgba(251, 191, 36, 0.25);
+}
+ 
+.ch-stat-icon-rose {
+  background: linear-gradient(135deg, #f43f5e, #dc2626);
+  box-shadow: 0 8px 20px rgba(244, 63, 94, 0.25);
+}
+ 
+.ch-stat-label {
+  font-size: 0.7rem;
+  color: var(--ch-muted);
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+ 
+.ch-stat-value {
+  font-size: 1.5rem;
+  color: var(--ch-text);
+}
+ 
+ 
+/* ============================================
+   Main Content: Section title & Search bar
+   ============================================ */
+ 
+.ch-section-title {
+  font-size: 1.75rem;
+}
+ 
+.ch-section-subtitle {
+  font-size: 0.875rem;
+  color: var(--ch-muted);
+}
+ 
+.ch-search-icon {
+  left: 1rem;
+  color: #9ca3af;
+  z-index: 2;
+}
+ 
+.ch-search-input {
+  padding-left: 2.75rem;
+  border-color: var(--ch-border);
+  font-size: 0.875rem;
+  background: #fff;
+}
+ 
+.ch-search-input:focus {
+  border-color: var(--ch-violet);
+  box-shadow: 0 0 0 0.2rem rgba(124, 58, 237, 0.15);
+}
+ 
+ 
+/* ============================================
+   Empty State (shown when there are no contacts)
+   ============================================ */
+ 
+.ch-empty-icon {
+  width: 5rem;
+  height: 5rem;
+  background: #f3f4f6;
+  color: #d1d5db;
+  font-size: 2rem;
+}
+ 
+.ch-empty-title {
+  color: var(--ch-muted);
+}
+ 
+.ch-empty-text {
+  color: #9ca3af;
+  font-size: 0.875rem;
+}
+ 
+ 
+/* ============================================
+   Contact Cards (ch-contact-card - legacy/unused
+   by current main.js, kept in case markup reverts)
+   ============================================ */
+ 
+.ch-contact-card {
+  background-color: var(--ch-white);
+  border: 1px solid rgba(229, 231, 235, 0.6) !important;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+ 
+.ch-contact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  border-color: rgba(127, 35, 254, 0.2) !important;
+}
+ 
+.ch-card-avatar {
+  width: 3.25rem;
+  height: 3.25rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--ch-white);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+ 
+.ch-card-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0.75rem;
+}
+ 
+.ch-card-name {
+  font-size: 1.15rem;
+  color: var(--ch-text);
+  line-height: 1.2;
+}
+ 
+.ch-card-phone,
+.ch-card-detail {
+  font-size: 0.95rem;
+  color: var(--ch-muted);
+}
+ 
+.ch-card-footer {
+  border-top: 1px solid var(--ch-border);
+}
+ 
+.last-border-0:last-child {
+  border-bottom: none !important;
+}
+
+
+/* ============================================
+   Contact Cards (ACTIVE — matches the markup
+   generated by main.js: .contact-card,
+   .contact-header, .contact-avatar, .contact-info,
+   .contact-details, .contact-detail, .contact-tags,
+   .tag, .contact-actions, .contact-action)
+   ============================================ */
+
+.contact-card {
+  background: var(--ch-white);
+  border-radius: 12px;
+  padding: 1.5rem;
+  border: 1px solid var(--ch-border);
+  transition: all 0.3s ease;
+  position: relative;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  height: 100%;
+}
+
+.contact-card:hover {
+  border-color: var(--ch-violet);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.contact-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.contact-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.contact-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* Favorite / Emergency badges on the avatar (real <i> icons,
+   rendered via .avatar-badge span in main.js — reliable across
+   Font Awesome versions, unlike ::before/::after unicode content) */
+.avatar-badge {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--ch-white);
+  font-size: 10px;
+  color: var(--ch-white);
+  z-index: 2;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
+}
+
+.avatar-badge i {
+  font-size: 10px;
+  color: var(--ch-white);
+}
+
+.badge-favorite {
+  top: -6px;
+  right: -6px;
+  background: var(--ch-yellow);
+}
+
+.badge-emergency {
+  bottom: -6px;
+  right: -6px;
+  background: var(--ch-red);
+}
+
+.contact-info h4 {
+  font-size: 18px;
+  margin-bottom: 0.25rem;
+  color: var(--ch-text);
+  font-weight: bold;
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.contact-detail {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 14px;
+  color: var(--ch-text);
+}
+
+.contact-detail i {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.contact-detail.phone i {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--ch-blue);
+}
+
+.contact-detail.email i {
+  background: rgba(127, 35, 254, 0.1);
+  color: var(--ch-violet);
+}
+
+.contact-detail.address i {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--ch-green);
+}
+
+.contact-tags {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.tag {
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  text-transform: capitalize;
+}
+
+.tag.family {
+  background: var(--ch-blue);
+  color: white;
+}
+
+.tag.friends,
+.tag.work,
+.tag.school,
+.tag.other {
+  background: #f7fafc;
+  color: var(--ch-muted);
+}
+
+.tag.emergency {
+  background: var(--ch-red);
+  color: white;
+}
+
+.tag.emergency i {
+  margin-right: 0.25rem;
+  color: white;
+}
+
+.contact-actions {
+  display: flex;
+  gap: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--ch-border);
+}
+
+.contact-action {
+  background: none;
+  border: none;
+  color: var(--ch-muted);
+  font-size: 18px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  padding: 0.5rem;
+  border-radius: 8px;
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.contact-action:hover {
+  transform: scale(1.1);
+}
+
+.contact-action.call {
+  color: var(--ch-green);
+  background: rgba(16, 185, 129, 0.1);
+  width: 36px;
+  height: 36px;
+}
+
+.contact-action.email {
+  color: var(--ch-violet);
+  background: rgba(127, 35, 254, 0.1);
+  width: 36px;
+  height: 36px;
+}
+
+.contact-action.favorite {
+  color: var(--ch-muted);
+  background: none;
+}
+
+.contact-action.favorite.active {
+  color: var(--ch-yellow);
+  background: rgba(234, 179, 8, 0.1);
+}
+
+.contact-action.emergency {
+  color: var(--ch-muted);
+  background: none;
+}
+
+.contact-action.emergency.active {
+  color: var(--ch-red);
+  background: rgba(236, 72, 153, 0.1);
+}
+
+.contact-action.delete {
+  color: var(--ch-red);
+}
+
+ 
+/* ----- Small round buttons: quick actions (call, email) ----- */
+ 
+.ch-quick-btn {
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border-radius: 50% !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+ 
+.ch-quick-btn:hover {
+  transform: scale(1.08);
+  opacity: 0.9;
+}
+ 
+ 
+/* ----- Small icon buttons: edit / delete / favorite / emergency ----- */
+ 
+.ch-action-btn {
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--ch-muted);
+  background: transparent;
+  border: none;
+  transition: all 0.2s ease;
+}
+ 
+.ch-action-btn i {
+  font-size: 1rem;
+}
+ 
+.ch-action-btn:hover {
+  color: var(--ch-text);
+  background: rgba(243, 244, 246, 0.8);
+}
+ 
+.ch-action-btn.delete-contact:hover {
+  color: #dc2626;
+  background: #fef2f2;
+}
+ 
+.ch-action-btn.toggle-favorite:hover {
+  color: #fbbf24;
+  background: #fffbeb;
+}
+ 
+.ch-action-btn.toggle-emergency:hover {
+  color: #e11d48;
+  background: #fff1f2;
+}
+ 
+.ch-action-btn.edit-contact:hover {
+  color: var(--ch-violet);
+  background: #f5f3ff;
+}
+ 
+ 
+/* ============================================
+   Colored badges & detail icons (used for
+   phone / email / address / group labels)
+   ============================================ */
+ 
+.bg-light-blue { background-color: #eff6ff !important; }
+.text-blue { color: #2563eb !important; }
+ 
+.bg-light-purple { background-color: #f3e8ff !important; }
+.text-purple { color: #7c3aed !important; }
+ 
+.bg-light-green { background-color: #ecfdf5 !important; }
+.text-green { color: #059669 !important; }
+ 
+.bg-light-rose { background-color: #fff1f2 !important; }
+.text-rose { color: #e11d48 !important; }
+ 
+.ch-detail-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+ 
+.fs-7 { font-size: 0.8rem; }
+.fs-7.5 { font-size: 0.85rem; }
+.fs-8 { font-size: 0.75rem; }
+ 
+ 
+/* ============================================
+   Sidebar (Favorites / Emergency lists)
+   ============================================ */
+ 
+.ch-sidebar {
+  top: 7rem;
+}
+ 
+.ch-sidebar-card {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+ 
+.ch-sidebar-header-amber {
+  background: linear-gradient(90deg, #fffbeb, #fff7ed);
+}
+ 
+.ch-sidebar-header-rose {
+  background: linear-gradient(90deg, #fff1f2, #fef2f2);
+}
+ 
+.ch-sidebar-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+}
+ 
+.ch-sidebar-caption {
+  font-size: 0.7rem;
+  color: var(--ch-muted);
+}
+ 
+.ch-sidebar-body {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+
+/* ----- Sidebar contact list items (Favorites / Emergency rows) ----- */
+
+.ch-sidebar-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.ch-sidebar-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 0.75rem;
+  background: #fff;
+  border: 1px solid var(--ch-border-gray-100);
+  border-radius: 1rem;
+  transition: box-shadow 0.2s ease;
+}
+
+.ch-sidebar-item:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.ch-sidebar-item-avatar {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.ch-sidebar-item-name {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ch-text);
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+.ch-sidebar-item-phone {
+  font-size: 0.8rem;
+  color: var(--ch-muted);
+  margin-bottom: 0;
+}
+
+.ch-sidebar-item-action {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  flex-shrink: 0;
+  margin-left: auto;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.ch-sidebar-item-action:hover {
+  transform: scale(1.08);
+  opacity: 0.9;
+}
+
+.ch-sidebar-item-action.action-call {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.ch-sidebar-item-action.action-emergency {
+  background: #fff1f2;
+  color: #e11d48;
+}
+
+/* ----- Sidebar contact list rows (favorites/emergency lists
+   generated by main.js): .sidebar-contact-card,
+   .sidebar-contact-avatar, .sidebar-contact-info,
+   .sidebar-call-btn ----- */
+
+.sidebar-contact-card {
+  background: var(--ch-white);
+  border-radius: 12px;
+  padding: 1rem;
+  border: 1px solid var(--ch-border);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.sidebar-contact-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.sidebar-contact-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  color: white;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.sidebar-contact-info {
+  flex: 1;
+}
+
+.sidebar-contact-info h5 {
+  font-size: 16px;
+  margin-bottom: 0.25rem;
+  color: var(--ch-text);
+  font-weight: bold;
+}
+
+.sidebar-contact-info p {
+  font-size: 14px;
+  color: var(--ch-muted);
+  margin: 0;
+}
+
+.sidebar-call-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.sidebar-call-btn.favorites-call {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--ch-green);
+}
+
+.sidebar-call-btn.favorites-call:hover {
+  background: var(--ch-green);
+  color: white;
+  transform: scale(1.1);
+}
+
+.sidebar-call-btn.emergency-call {
+  background: rgba(236, 72, 153, 0.1);
+  color: var(--ch-red);
+}
+
+.sidebar-call-btn.emergency-call:hover {
+  background: var(--ch-red);
+  color: white;
+  transform: scale(1.1);
+}
+
+ 
+/* ============================================
+   Add / Edit Contact Modal Form
+   ============================================ */
+ 
+.ch-avatar-preview {
+  width: 6rem;
+  height: 6rem;
+  background: linear-gradient(135deg, #60a5fa, #2563eb);
+}
+ 
+.ch-photo-btn {
+  background: #f3f4f6;
+  color: #374151;
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+  border: none;
+}
+ 
+.ch-photo-btn:hover {
+  background: #e5e7eb;
+}
+ 
+.ch-form-control {
+  background: #f9fafb;
+  border-color: var(--ch-border);
+  font-size: 0.875rem;
+  padding: 0.75rem 1rem;
+}
+ 
+.ch-form-control:focus {
+  background: #fff;
+  border-color: var(--ch-violet);
+  box-shadow: 0 0 0 0.2rem rgba(124, 58, 237, 0.15);
+}
+ 
+.is-invalid.ch-form-control {
+  border-color: #dc2626 !important;
+  background-image: none !important;
+}
+ 
+.is-invalid.ch-form-control:focus {
+  box-shadow: 0 0 0 0.2rem rgba(220, 38, 38, 0.15) !important;
+}
+ 
+.ch-btn-cancel {
+  background: #f3f4f6;
+  color: #374151;
+  border: none;
+  padding: 0.75rem 1.25rem;
+}
+ 
+.ch-btn-cancel:hover {
+  background: #e5e7eb;
+  color: #374151;
+}
+ 
+.form-check-input:checked {
+  background-color: var(--ch-violet);
+  border-color: var(--ch-violet);
+}
