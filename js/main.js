@@ -24,30 +24,17 @@ var searchInput = document.getElementById("searchInput");
 var currentIndex = 0;
 var allContact = [];
 
-var defaultContacts = [];
 
-try {
-  var saved = localStorage.getItem("contacts");
-  if (saved) {
-    allContact = JSON.parse(saved);
-    if (!Array.isArray(allContact)) throw new Error("Corrupted contacts data");
-  } else {
-    allContact = defaultContacts;
-    saveContacts();
-  }
-} catch (err) {
-  console.warn("LocalStorage unavailable or corrupted, using default contacts:", err);
-  allContact = defaultContacts;
+if(localStorage.getItem("contacts")){
+    allContact = JSON.parse(localStorage.getItem("contacts"));
+    console.log(allContact);
+    display();
 }
 
 display();
 
 function saveContacts() {
-  try {
     localStorage.setItem("contacts", JSON.stringify(allContact));
-  } catch (err) {
-    console.warn("Could not save contacts to localStorage:", err);
-  }
 }
 
 //! Add Contact Function 
@@ -119,31 +106,40 @@ function display() {
     totalContacts.innerHTML = "0";
     favoritesCount.innerHTML = "0";
     emergencyCount.innerHTML = "0";
-    favoritesList.innerHTML = '<p class="text-center text-muted small mb-0 py-4">No favorites yet</p>';
-    emergencyList.innerHTML = '<p class="text-center text-muted small mb-0 py-4">No emergency contacts</p>';
+    favoritesList.innerHTML =
+      '<p class="text-center text-muted small mb-0 py-4">No favorites yet</p>';
+    emergencyList.innerHTML =
+      '<p class="text-center text-muted small mb-0 py-4">No emergency contacts</p>';
     return;
   }
 
-  var box = '';
+  var box = "";
   var favTotal = 0;
   var emgTotal = 0;
-  var favBox = '';
-  var emgBox = '';
+  var favBox = "";
+  var emgBox = "";
 
   for (var i = 0; i < allContact.length; i++) {
     var contact = allContact[i];
-    var nameParts = contact.fullName ? contact.fullName.trim().split(" ") : ['?'];
-    var sideInitials = nameParts.length >= 2
-      ? (nameParts[0].charAt(0) + nameParts[1].charAt(0)).toUpperCase()
-      : nameParts[0].charAt(0).toUpperCase();
 
-    // Favorites Sidebar Item
+    // Initials Generator (First letter of first name + first letter of second name)
+    var nameParts = contact.fullName
+      ? contact.fullName.trim().split(" ")
+      : ["?"];
+
+    var initials =
+      nameParts.length >= 2
+        ? (nameParts[0].charAt(0) + nameParts[1].charAt(0)).toUpperCase()
+        : nameParts[0].charAt(0).toUpperCase();
+
+    // Favorites Sidebar
     if (contact.isFavorite) {
       favTotal++;
+
       favBox += `
         <div class="sidebar-contact-card">
-          <div class="sidebar-contact-avatar" style="background: #3b82f6">
-            ${sideInitials}
+          <div class="sidebar-contact-avatar" style="background:#3b82f6">
+            ${initials}
           </div>
           <div class="sidebar-contact-info">
             <h5>${contact.fullName}</h5>
@@ -155,13 +151,14 @@ function display() {
         </div>`;
     }
 
-    // Emergency Sidebar Item
+    // Emergency Sidebar
     if (contact.isEmergency) {
       emgTotal++;
+
       emgBox += `
         <div class="sidebar-contact-card">
-          <div class="sidebar-contact-avatar" style="background: #ef4444">
-            ${sideInitials}
+          <div class="sidebar-contact-avatar" style="background:#ef4444">
+            ${initials}
           </div>
           <div class="sidebar-contact-info">
             <h5>${contact.fullName}</h5>
@@ -173,74 +170,125 @@ function display() {
         </div>`;
     }
 
-    // Initials Generator (first two letters of the first name)
-    var firstName = contact.fullName.trim().split(" ")[0];
-    var initials = (firstName.charAt(0) + firstName.charAt(1)).toUpperCase();
-
-    // Main Contact Card HTML
+    // Main Contact Card
     box += `
       <div class="col-md-6">
         <div class="contact-card">
           <div class="contact-header">
             <div class="contact-avatar bg-primary">
               ${initials}
-              ${contact.isFavorite ? '<span class="avatar-badge badge-favorite"><i class="fas fa-star"></i></span>' : ''}
-              ${contact.isEmergency ? '<span class="avatar-badge badge-emergency"><i class="fas fa-heart-pulse"></i></span>' : ''}
+              ${
+                contact.isFavorite
+                  ? '<span class="avatar-badge badge-favorite"><i class="fas fa-star"></i></span>'
+                  : ""
+              }
+              ${
+                contact.isEmergency
+                  ? '<span class="avatar-badge badge-emergency"><i class="fas fa-heart-pulse"></i></span>'
+                  : ""
+              }
             </div>
+
             <div class="contact-info">
               <h4>${contact.fullName}</h4>
             </div>
           </div>
+
           <div class="contact-details">
             <div class="contact-detail phone">
               <i class="fas fa-phone"></i>
               <span>${contact.phoneNumber}</span>
             </div>
+
             <div class="contact-detail email">
               <i class="fas fa-envelope"></i>
               <span>${contact.email}</span>
             </div>
+
             <div class="contact-detail address">
               <i class="fas fa-map-marker-alt"></i>
               <span>${contact.address}</span>
             </div>
           </div>
+
           <div class="contact-tags">
-            <span class="tag ${contact.group}">${contact.group}</span>
-            ${contact.isEmergency ? '<span class="tag emergency"><i class="fas fa-heartbeat"></i> Emergency</span>' : ''}
-            ${contact.isFavorite ? '<span class="tag favorite bg-warning"><i class="fas fa-star"></i> Favorite</span>' : ''}
+            <span class="tag ${contact.group}">
+              ${contact.group}
+            </span>
+
+            ${
+              contact.isEmergency
+                ? '<span class="tag emergency"><i class="fas fa-heartbeat"></i> Emergency</span>'
+                : ""
+            }
+
+            ${
+              contact.isFavorite
+                ? '<span class="tag favorite bg-warning"><i class="fas fa-star"></i> Favorite</span>'
+                : ""
+            }
           </div>
+
           <div class="contact-actions">
+
             <a href="tel:${contact.phoneNumber}" class="contact-action call" title="Call">
               <i class="fas fa-phone"></i>
             </a>
+
             <a href="mailto:${contact.email}" class="contact-action email" title="Email">
               <i class="fas fa-envelope"></i>
             </a>
-            <button onclick="toggleFav(${i})" class="contact-action favorite ${contact.isFavorite ? 'active' : ''}" title="Favorite">
+
+            <button onclick="toggleFav(${i})"
+              class="contact-action favorite ${
+                contact.isFavorite ? "active" : ""
+              }"
+              title="Favorite">
               <i class="fas fa-star"></i>
             </button>
-            <button onclick="toggleEmg(${i})" class="contact-action emergency ${contact.isEmergency ? 'active' : ''}" title="Emergency">
+
+            <button onclick="toggleEmg(${i})"
+              class="contact-action emergency ${
+                contact.isEmergency ? "active" : ""
+              }"
+              title="Emergency">
               <i class="fas fa-heart"></i>
             </button>
-            <button class="contact-action" onclick="editData(${i})" data-bs-toggle="modal" data-bs-target="#addContactModal" title="Edit">
+
+            <button
+              class="contact-action"
+              onclick="editData(${i})"
+              data-bs-toggle="modal"
+              data-bs-target="#addContactModal"
+              title="Edit">
               <i class="fas fa-edit"></i>
             </button>
-            <button class="contact-action delete" onclick="deleteContact(${i})" title="Delete">
+
+            <button
+              class="contact-action delete"
+              onclick="deleteContact(${i})"
+              title="Delete">
               <i class="fas fa-trash"></i>
             </button>
+
           </div>
         </div>
       </div>`;
   }
 
   rowData.innerHTML = box;
+
   totalContacts.innerHTML = allContact.length;
   favoritesCount.innerHTML = favTotal;
   emergencyCount.innerHTML = emgTotal;
 
-  favoritesList.innerHTML = favBox || '<p class="text-center text-muted small mb-0 py-4">No favorites yet</p>';
-  emergencyList.innerHTML = emgBox || '<p class="text-center text-muted small mb-0 py-4">No emergency contacts</p>';
+  favoritesList.innerHTML =
+    favBox ||
+    '<p class="text-center text-muted small mb-0 py-4">No favorites yet</p>';
+
+  emergencyList.innerHTML =
+    emgBox ||
+    '<p class="text-center text-muted small mb-0 py-4">No emergency contacts</p>';
 }
 
 //! Delete Contact Function
