@@ -188,7 +188,6 @@
 .ch-search-icon {
   left: 1rem;
   color: #9ca3af;
-  z-index: 2;
 }
  
 .ch-search-input {
@@ -328,7 +327,6 @@
   border: 1px solid var(--ch-white);
   font-size: 10px;
   color: var(--ch-white);
-  z-index: 2;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.15));
 }
 

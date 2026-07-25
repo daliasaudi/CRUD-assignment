@@ -25,16 +25,16 @@ var currentIndex = 0;
 var allContact = [];
 
 
-if(localStorage.getItem("contacts")){
-    allContact = JSON.parse(localStorage.getItem("contacts"));
-    console.log(allContact);
-    display();
+if (localStorage.getItem("contacts")) {
+  allContact = JSON.parse(localStorage.getItem("contacts"));
+  console.log(allContact);
+  display();
 }
 
 display();
 
 function saveContacts() {
-    localStorage.setItem("contacts", JSON.stringify(allContact));
+  localStorage.setItem("contacts", JSON.stringify(allContact));
 }
 
 //! Add Contact Function 
@@ -177,16 +177,14 @@ function display() {
           <div class="contact-header">
             <div class="contact-avatar bg-primary">
               ${initials}
-              ${
-                contact.isFavorite
-                  ? '<span class="avatar-badge badge-favorite"><i class="fas fa-star"></i></span>'
-                  : ""
-              }
-              ${
-                contact.isEmergency
-                  ? '<span class="avatar-badge badge-emergency"><i class="fas fa-heart-pulse"></i></span>'
-                  : ""
-              }
+              ${contact.isFavorite
+        ? '<span class="avatar-badge badge-favorite"><i class="fas fa-star"></i></span>'
+        : ""
+      }
+              ${contact.isEmergency
+        ? '<span class="avatar-badge badge-emergency"><i class="fas fa-heart-pulse"></i></span>'
+        : ""
+      }
             </div>
 
             <div class="contact-info">
@@ -216,17 +214,15 @@ function display() {
               ${contact.group}
             </span>
 
-            ${
-              contact.isEmergency
-                ? '<span class="tag emergency"><i class="fas fa-heartbeat"></i> Emergency</span>'
-                : ""
-            }
+            ${contact.isEmergency
+        ? '<span class="tag emergency"><i class="fas fa-heartbeat"></i> Emergency</span>'
+        : ""
+      }
 
-            ${
-              contact.isFavorite
-                ? '<span class="tag favorite bg-warning"><i class="fas fa-star"></i> Favorite</span>'
-                : ""
-            }
+            ${contact.isFavorite
+        ? '<span class="tag favorite bg-warning"><i class="fas fa-star"></i> Favorite</span>'
+        : ""
+      }
           </div>
 
           <div class="contact-actions">
@@ -240,17 +236,15 @@ function display() {
             </a>
 
             <button onclick="toggleFav(${i})"
-              class="contact-action favorite ${
-                contact.isFavorite ? "active" : ""
-              }"
+              class="contact-action favorite ${contact.isFavorite ? "active" : ""
+      }"
               title="Favorite">
               <i class="fas fa-star"></i>
             </button>
 
             <button onclick="toggleEmg(${i})"
-              class="contact-action emergency ${
-                contact.isEmergency ? "active" : ""
-              }"
+              class="contact-action emergency ${contact.isEmergency ? "active" : ""
+      }"
               title="Emergency">
               <i class="fas fa-heart"></i>
             </button>
@@ -378,13 +372,21 @@ function search() {
 
   for (var i = 0; i < allContact.length; i++) {
     var contact = allContact[i];
+
     if (
       contact.fullName.toLowerCase().includes(text) ||
       contact.email.toLowerCase().includes(text) ||
       contact.phoneNumber.toLowerCase().includes(text)
     ) {
-      var firstName = contact.fullName.trim().split(" ")[0];
-      var initials = (firstName.charAt(0) + firstName.charAt(1)).toUpperCase();
+
+      // Initials (First letter of first name + first letter of second name)
+      var nameParts = contact.fullName
+        ? contact.fullName.trim().split(" ")
+        : ["?"];
+
+      var initials = nameParts.length >= 2
+        ? (nameParts[0].charAt(0) + nameParts[1].charAt(0)).toUpperCase()
+        : nameParts[0].charAt(0).toUpperCase();
 
       box += `
       <div class="col-md-6">
@@ -395,48 +397,70 @@ function search() {
               ${contact.isFavorite ? '<span class="avatar-badge badge-favorite"><i class="fas fa-star"></i></span>' : ''}
               ${contact.isEmergency ? '<span class="avatar-badge badge-emergency"><i class="fas fa-heart-pulse"></i></span>' : ''}
             </div>
+
             <div class="contact-info">
               <h4>${contact.fullName}</h4>
             </div>
           </div>
+
           <div class="contact-details">
             <div class="contact-detail phone">
               <i class="fas fa-phone"></i>
               <span>${contact.phoneNumber}</span>
             </div>
+
             <div class="contact-detail email">
               <i class="fas fa-envelope"></i>
               <span>${contact.email}</span>
             </div>
+
             <div class="contact-detail address">
               <i class="fas fa-map-marker-alt"></i>
               <span>${contact.address}</span>
             </div>
           </div>
+
           <div class="contact-tags">
-            <span class="tag ${contact.group}">${contact.group}</span>
+            <span class="tag ${contact.group}">
+              ${contact.group}
+            </span>
+
             ${contact.isEmergency ? '<span class="tag emergency"><i class="fas fa-heartbeat"></i> Emergency</span>' : ''}
+
             ${contact.isFavorite ? '<span class="tag favorite bg-warning"><i class="fas fa-star"></i> Favorite</span>' : ''}
           </div>
+
           <div class="contact-actions">
+
             <a href="tel:${contact.phoneNumber}" class="contact-action call" title="Call">
               <i class="fas fa-phone"></i>
             </a>
+
             <a href="mailto:${contact.email}" class="contact-action email" title="Email">
               <i class="fas fa-envelope"></i>
             </a>
+
             <button onclick="toggleFav(${i})" class="contact-action favorite ${contact.isFavorite ? 'active' : ''}" title="Favorite">
               <i class="fas fa-star"></i>
             </button>
+
             <button onclick="toggleEmg(${i})" class="contact-action emergency ${contact.isEmergency ? 'active' : ''}" title="Emergency">
               <i class="fas fa-heart"></i>
             </button>
-            <button class="contact-action" onclick="editData(${i})" data-bs-toggle="modal" data-bs-target="#addContactModal" title="Edit">
+
+            <button class="contact-action" onclick="editData(${i})"
+              data-bs-toggle="modal"
+              data-bs-target="#addContactModal"
+              title="Edit">
               <i class="fas fa-edit"></i>
             </button>
-            <button class="contact-action delete" onclick="deleteContact(${i})" title="Delete">
+
+            <button class="contact-action delete"
+              onclick="deleteContact(${i})"
+              title="Delete">
               <i class="fas fa-trash"></i>
             </button>
+
           </div>
         </div>
       </div>`;
@@ -458,6 +482,7 @@ function search() {
 if (searchInput) {
   searchInput.addEventListener("input", search);
 }
+
 
 //! Close Modal Helper
 function closeModal() {
